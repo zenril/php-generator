@@ -1,0 +1,17 @@
+{
+    "name": "zenril/php-generator",
+    "description": "Help Generate files based on mustache templates",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "mustache/mustache": "^2.11"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aaron Meredith",
+            "email": "aaron@aaron-m.co.nz"
+        }
+    ]
+}
