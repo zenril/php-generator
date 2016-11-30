@@ -1,0 +1,56 @@
+{{% FILTERS }}
+{{# class }}
+<?php
+
+use Doctrine\ORM\Mapping as ORM;
+
+/** @ORM\Entity */
+class {{ name | member.uc }}
+{   
+    
+    {{# members }}
+        /*
+        * @var {{name}}
+        *
+        {{# column}}
+        * @ORM\Column({{#name}}name="{{ . | member.underscore }}"{{/name}}{{#type}}, type="{{.}}"{{/type}}{{#length}}, length={{.}}{{/length}}{{#unique}}, unique={{.}}{{/unique}}{{#nullable}}, nullable={{.}}{{/nullable}}{{#precision}}, precision={{.}}{{/precision}}{{#scale}}, scale={{.}}{{/scale}}) 
+        {{/ column}}
+        {{# id}}
+        * @ORM\Id
+        * @ORM\GeneratedValue(strategy="AUTO")
+        {{/ id}}
+        */
+        private ${{name}};
+    
+    {{/ members }}
+    {{# members }}
+        
+        
+        /**
+        * Get {{ name }}
+        *
+        * @return {{ column.type }}
+        */
+        public function get{{ name | member.uc }}()
+        {
+            return $this->{{ name }};
+        }
+
+        /**
+        * Set {{ name }}
+        *
+        * @param string ${{ name }}
+        *
+        * @return {{ class.name | member.uc }}
+        */
+        public function set{{ name | member.uc }}(${{ name }})
+        {
+            $this->{{ name }} = ${{ name }};
+
+            return $this;
+        }
+    {{/ members }}
+
+
+}
+{{/ class }}
