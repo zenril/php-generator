@@ -9,12 +9,15 @@ class PHPGenerator {
 
     public function __construct( $output, $type = "Doctrine" )
     {
+        $this->namespace = ucwords(preg_replace('/\//', ' \\ ', strtolower( $output )));
+        $this->namespace = str_replace(' ', '', $this->namespace );
         $this->output = __DIR__ . '/../../' . $output;
         $this->type = $type;
     }
 
     public function input( $input = array() ){
         $this->input = $input;
+        
     }
 
     public function run(){
@@ -31,6 +34,8 @@ class PHPGenerator {
             mkdir($this->output, 0775, true);
         }
         
+        $this->input['namespace'] = $this->namespace;
+
         $output = $m->render($tmpl, $this->input);
         
         $class = fopen($this->output . '/' . ucfirst($this->input['class']['name']) . ".php", "w");
