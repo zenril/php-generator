@@ -1,22 +1,23 @@
 <?php
 
-require '../PHPGenerator.php';
+require '../TemplateClassWriter.php';
 
-$PHPG = new PHPGenerator("test/class");
+use Zenril\PHPGenerator\TemplateClassWriter;
 
-$PHPG->input(array('class' => array(
-    'name' => 'Tree',
+$PHPG = new TemplateClassWriter("app/Entities");
+
+$PHPG->classData("Tree", array(
     'members' => array(
         array(
             'column' => array('type' => 'BigInt'),
             'name' => 'objectId',
-            'id' => true            
+            'id' => true  
         ),
         array(
             'column' => array('type' => 'varchar', 'length' => 255),
-            'name' => 'objectName'           
+            'name' => 'objectName'
         )
     )
-)));
+));
 
-$PHPG->run();
+$PHPG->write();
