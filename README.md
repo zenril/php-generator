@@ -1,2 +1,2 @@
 # php-generator - ALPHA
-Help Generate files based on mustache templates
+PRE Alpha - Help Generate files based on mustache templates
