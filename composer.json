@@ -9,9 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=5.2.4"
-    },
-    "require-dev": {
+        "php": ">=5.2.4",
         "mustache/mustache": "^2.11"
     },
     "autoload": {
