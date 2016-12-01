@@ -2,9 +2,7 @@
     "name": "zenril/php-generator",
     "description": "Help Generate files based on mustache templates",
     "require": {
-        "php": ">=5.3.0"
-    },
-    "require-dev": {
+        "php": ">=5.3.0",
         "mustache/mustache": "^2.11"
     },
     "license": "MIT",
