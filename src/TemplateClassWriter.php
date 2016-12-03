@@ -6,7 +6,7 @@ class TemplateClassWriter {
     private $input = array();
     private $output = "";
     private $type = "";
-    
+
     public function __construct( $output )
     {
         $this->namespace = ucwords(preg_replace('/\//', ' \\ ', strtolower( $output )));
@@ -21,7 +21,7 @@ class TemplateClassWriter {
 
     public function write( $type = "DoctrineEntity" ){
         $this->type = $type;
-        $tmpl = file_get_contents(__DIR__ . '/templates/'.$this->type.'.tmpl',TRUE);
+        $tmpl = file_get_contents(__DIR__ . '/Templates/'.$this->type.'.tmpl',TRUE);
         $m = new \Mustache_Engine;
         $m->addHelper('member', [
             'lower' => function($value) { return strtolower((string) $value); },
