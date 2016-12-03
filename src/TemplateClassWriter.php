@@ -6,12 +6,12 @@ class TemplateClassWriter {
     private $input = array();
     private $output = "";
     private $type = "";
-
+    
     public function __construct( $output )
     {
         $this->namespace = ucwords(preg_replace('/\//', ' \\ ', strtolower( $output )));
         $this->namespace = str_replace(' ', '', $this->namespace );
-        $this->output = __DIR__ . '/../../' . $output;
+        $this->output = __DIR__ . '/../../../../' . $output;
     }
 
     public function classData($classname, $data = array() ){
