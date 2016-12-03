@@ -1,8 +1,6 @@
 <?php
 namespace Zenril\PHPGenerator;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 class TemplateClassWriter {
 
     private $input = array();
