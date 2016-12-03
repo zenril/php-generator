@@ -10,8 +10,7 @@
     ],
     "require": {
         "php": ">=5.2.4",
-        "mustache/mustache": "^2.11",
-        "zenril/php-generator": "^0.0.1"
+        "mustache/mustache": "^2.11"
     },
     "autoload": {
         "psr-0": { "Zenril": "src/" }
