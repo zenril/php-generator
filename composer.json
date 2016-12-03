@@ -13,6 +13,6 @@
         "mustache/mustache": "^2.11"
     },
     "autoload": {
-        "psr-4": { "Zenril\\": "src/" }
+        "psr-4": { "Zenril\\PHPGenerator\\": "src/" }
     }    
 }
