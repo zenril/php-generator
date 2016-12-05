@@ -1,8 +1,6 @@
 <?php
 namespace Zenril\PHPGenerator;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 class TemplateClassWriter {
 
     private $input = array();
@@ -13,7 +11,7 @@ class TemplateClassWriter {
     {
         $this->namespace = ucwords(preg_replace('/\//', ' \\ ', strtolower( $output )));
         $this->namespace = str_replace(' ', '', $this->namespace );
-        $this->output = __DIR__ . '/../../' . $output;
+        $this->output = __DIR__ . '/../../../../' . $output;
     }
 
     public function classData($classname, $data = array() ){
@@ -23,7 +21,7 @@ class TemplateClassWriter {
 
     public function write( $type = "DoctrineEntity" ){
         $this->type = $type;
-        $tmpl = file_get_contents(__DIR__ . '/templates/'.$this->type.'.tmpl',TRUE);
+        $tmpl = file_get_contents(__DIR__ . '/Templates/'.$this->type.'.tmpl',TRUE);
         $m = new \Mustache_Engine;
         $m->addHelper('member', [
             'lower' => function($value) { return strtolower((string) $value); },

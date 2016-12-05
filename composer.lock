@@ -4,10 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e13c009784591e1eaf412d3b47b48cea",
-    "content-hash": "9411997ae39bcb7910da9b15ebaed51c",
-    "packages": [],
-    "packages-dev": [
+    "hash": "cd511d6da20779e23c9c5e0fdffbab63",
+    "content-hash": "99c7380fec5d7cf0e01dc637fa9c31e9",
+    "packages": [
         {
             "name": "mustache/mustache",
             "version": "v2.11.1",
@@ -55,13 +54,14 @@
             "time": "2016-07-31 06:18:27"
         }
     ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=5.2.4"
     },
     "platform-dev": []
 }
