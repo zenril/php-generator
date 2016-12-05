@@ -43,7 +43,9 @@ class CreateDoctrineEntityCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {    
-       // 
+       //
+        $hasUniqueId = false;
+        $nameMap = array();
         $helper = new QuestionHelper();
         $classname =  $helper->ask($input, $output, new Question("<question>Please enter class name:</question>\n> ", null));
 
@@ -64,6 +66,12 @@ class CreateDoctrineEntityCommand extends Command
                 $output->writeln("","");
                 $member['name'] =  $helper->ask($input, $output, new Question("<question>Please enter member name:</question>\n> ", null));
             }
+            if($i > 1000){
+                throw new \Exception(
+                    'Quiting.. I seem to be in a crazy loop. I\'ll still try to generate what you have entered so far.'
+                );
+                break;
+            }
             $i++;
             
             //parse is id
@@ -75,8 +83,11 @@ class CreateDoctrineEntityCommand extends Command
             );
 
             $id_answer = $helper->ask($input, $output,  $id_question);
-            $member['id'] =  filter_var($id_answer, FILTER_VALIDATE_BOOLEAN);
+            $member['id'] = (bool) filter_var($id_answer, FILTER_VALIDATE_BOOLEAN);
 
+            if($member['id']){
+                $hasUniqueId = true;
+            }
 
             //parse column
             $member['column'] = array();
@@ -146,15 +157,34 @@ class CreateDoctrineEntityCommand extends Command
             );
 
             $nullable_answer = $helper->ask($input, $output,  $nullable_question);
-            $member['column']['nullable'] =  filter_var($nullable_answer, FILTER_VALIDATE_BOOLEAN);
+            $member['column']['nullable'] =  (bool) filter_var($nullable_answer, FILTER_VALIDATE_BOOLEAN);
             
-
-            
-
             $members[] = $member;
+            $nameMap[strtolower($member['name'])] = $member;
         } while (true);
 
-         $output->writeln("","");
+        if(!$hasUniqueId){
+            $name = "id";
+            
+            if(isset($nameMap["id"])){
+                $name = $classname . "Id";
+            }
+
+            if(isset($nameMap[strtolower($name)])){
+                $name = $classname ."_". rand ( 3 , 5) . "_Id" . ;
+            }
+
+            array_unshift( $members, array(
+                "name" => $name,
+
+                
+                
+
+
+            ));
+        }
+
+        $output->writeln("","");
         $create_question = new ChoiceQuestion(
             "<question> Are you sure you want to create the Entity $classname (defaults to true):</question>",
             array('false', 'true'),
@@ -162,15 +192,15 @@ class CreateDoctrineEntityCommand extends Command
         );
 
         $create_answer = $helper->ask($input, $output,  $create_question);
-       $create_answer =  filter_var($create_answer, FILTER_VALIDATE_BOOLEAN);
-       if($create_answer){
-            $PHPG = new TemplateClassWriter("app/Entities");
-            $PHPG->classData($classname, array(
-                'members' => $members
-            ));
+        $create_answer =  (bool) filter_var($create_answer, FILTER_VALIDATE_BOOLEAN);
+        if($create_answer){
+                $PHPG = new TemplateClassWriter("app/Entities");
+                $PHPG->classData($classname, array(
+                    'members' => $members
+                ));
 
-            $PHPG->write();
-       }
+                $PHPG->write();
+        }
 
         $output->writeln($classname);
     }
